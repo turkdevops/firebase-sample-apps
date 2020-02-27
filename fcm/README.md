@@ -1,4 +1,5 @@
 # Firebase Sample App: FCM (fcm)
+### WIP: This sample application is under development.
 
 Firebase Cloud Messaging integration with Quasar
 
