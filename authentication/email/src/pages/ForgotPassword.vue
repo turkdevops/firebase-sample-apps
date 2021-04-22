@@ -2,7 +2,7 @@
   <q-page padding="padding">
     <q-form class="authentication q-gutter-y-md" ref="forgotPasswordForm" @submit="onSubmit">
       <router-link to="/">
-          <q-img alt="Scori Logo" src="/statics/fp-logo.png"></q-img>
+          <q-img alt="Scori Logo" src="/fp-logo.png"></q-img>
       </router-link>
       <h4 class="q-mb-none">Forgot Password</h4>
       <div class="inst q-mb-lg">Please enter your email and we will send you a link to reset your password.</div>
@@ -17,7 +17,7 @@
         lazy-rules="lazy-rules"
         name="email"
         type="email"
-        :rules="[val =&gt; !!val || '*Field is required', val =&gt; val.includes('@') &amp;&amp; val.includes('.') || '*Please Provide a valid email']"
+        :rules="[val => !!val || '*Field is required', val => val.includes('@') && val.includes('.') || '*Please Provide a valid email']"
       ></q-input>
       <q-btn class="full-width q-mt-md" color="primary" data-cy="submit" label="RESET PASSWORD" :loading="loading" @click="onSubmit">
         <template v-slot:loading>

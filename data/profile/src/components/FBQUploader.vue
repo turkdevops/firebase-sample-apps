@@ -3,7 +3,7 @@ import { QUploaderBase } from 'quasar'
 export default {
   name: 'FBQUploader',
 
-  mixins: [ QUploaderBase ],
+  mixins: [QUploaderBase],
   props: {
     meta: {
       type: Object
@@ -68,11 +68,15 @@ export default {
             message: `One or more of your files failed to upload. ${err}`
           })
         })
+        .finally(() => {
+          this.reset()
+          this.filesUploading = []
+        })
     },
 
     uploadFileToFirestore (file) {
       const { meta } = this,
-        { userRef, storageRef } = this.$fb,
+        { docRef, storageRef } = this.$fb,
         index = this.filesUploading.length,
         fileSuffix = file.type.split('/')[1],
         uploadImageStorageRef = storageRef(`${this.prefixPath}${fileSuffix}`),
@@ -101,8 +105,8 @@ export default {
             this.files.forEach(async file => {
               this.updateComponent(index, 0, 'uploaded')
               const link = await profileImageStorageRef.snapshot.ref.getDownloadURL()
-              userRef('users', meta.id).update({ [`${meta.photoType}Photo`]: link })
-              this.$emit('uploaded', { files: [ file.name ] })
+              docRef('users', meta.id).update({ [`${meta.photoType}Photo`]: link })
+              this.$emit('uploaded', { files: [file.name] })
             })
             resolve()
           }

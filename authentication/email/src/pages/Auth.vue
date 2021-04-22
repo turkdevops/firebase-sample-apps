@@ -25,7 +25,7 @@
         color="primary"
         data-cy="password"
         label="PASSWORD"
-        :rules="[val =&gt; !!val || '*Field is required']"
+        :rules="[val => !!val || '*Field is required']"
         :type="isPwd ? 'password' : 'text'"
         @keyup.enter="onSubmit();"
       >
@@ -104,7 +104,8 @@ export default {
         .then(async success => {
           if (success) {
             this.$q.loading.show({
-              message: this.isRegistration ? 'Registering your account...'
+              message: this.isRegistration
+                ? 'Registering your account...'
                 : 'Authenticating your account...',
               backgroundColor: 'grey',
               spinner: QSpinnerGears,
